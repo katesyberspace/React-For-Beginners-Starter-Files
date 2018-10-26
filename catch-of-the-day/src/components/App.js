@@ -11,7 +11,7 @@ class App extends React.Component {
 
       <div className="catch-of-the-day">
         <div className="menu">
-          <Header/>
+          <Header tagline="Wes is Cool"/>
         </div>
         <Order />
         <Inventory/>

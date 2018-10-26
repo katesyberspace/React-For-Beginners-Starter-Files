@@ -1,11 +1,7 @@
 import React from 'react'
 
-export default class Header extends React.Component {
-
-  render() {
-    return (
-      <React.Fragment>
-        <header className="top">
+const Header = ({tagline}) => (
+    <header className="top">
           <h1>
             Catch 
             <span className="ofThe">
@@ -15,11 +11,9 @@ export default class Header extends React.Component {
             Day
           </h1>
           <h3 className="tagline">
-            <span>Fresh Daily</span>
-          </h3></header>
+            <span>{tagline}</span>
+          </h3>
+  </header>
+)
 
-      </React.Fragment>
-
-    )
-  }
-}
+export default Header 
