@@ -5,6 +5,21 @@ import Inventory from './Inventory'
 
 
 class App extends React.Component {
+  state = {
+    fishes: {},
+    order: {}
+  }
+
+  addFish = (fish)=>{
+    // copy existing state -- immutability
+    const fishes = {...this.state.fishes}
+    // add new fish
+    fishes[`fish${Date.now()}`] = fish
+    // setState - new ES6 syntax { fishes: fishes }  same as { fishes }
+    this.setState({
+      fishes
+    })
+  }
 
   render() {
     return (
@@ -14,7 +29,7 @@ class App extends React.Component {
           <Header tagline="Wes is Cool"/>
         </div>
         <Order />
-        <Inventory/>
+        <Inventory addFish={this.addFish}/>
       </div> 
 
     )
