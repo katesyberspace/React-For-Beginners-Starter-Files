@@ -3,6 +3,7 @@ import Header from './Header'
 import Order from './Order'
 import Inventory from './Inventory'
 import fishes from '../sample-fishes'
+import Fish from './Fish'
 
 class App extends React.Component {
   state = {
@@ -21,6 +22,7 @@ class App extends React.Component {
     })
   }
 
+  // this fn goes to Inventory to load in the sample fish into state  
   addSampleFishes = () => {
     this.setState({
       fishes
@@ -34,6 +36,9 @@ class App extends React.Component {
       <div className="catch-of-the-day">
         <div className="menu">
           <Header tagline="I Love Seafood"/>
+          <ul className="fishes">
+            {Object.keys(this.state.fishes).map( key => <Fish key={key} details={this.state.fishes[key]}/>)}  
+          </ul>
         </div>
         <Order />
         <Inventory addFish={this.addFish} addSampleFishes={this.addSampleFishes}/>
