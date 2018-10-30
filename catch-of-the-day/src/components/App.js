@@ -22,13 +22,19 @@ class App extends React.Component {
     })
   }
 
-  // this fn goes to Inventory to load in the sample fish into state  
-  addSampleFishes = () => {
-    this.setState({
-      fishes
-    })
+  addToOrder = (key) => {
+    // 1. copy order object
+    const order = {...this.state.order}
+    // 2. update order state 
+    order[key] = order[key] + 1 || 1
+    // 3. set state
+    this.setState({ order })
   }
 
+  // this fn goes to Inventory to load in the sample fish into state  
+  addSampleFishes = () => {
+    this.setState({ fishes })
+  }
 
   render() {
     return (
@@ -37,7 +43,14 @@ class App extends React.Component {
         <div className="menu">
           <Header tagline="I Love Seafood"/>
           <ul className="fishes">
-            {Object.keys(this.state.fishes).map( key => <Fish key={key} details={this.state.fishes[key]}/>)}  
+            {Object.keys(this.state.fishes).map( key => 
+                <Fish 
+                  key={key} 
+                  index={key} 
+                  details={this.state.fishes[key]} 
+                  addToOrder={this.addToOrder}
+                />
+            )}
           </ul>
         </div>
         <Order />
