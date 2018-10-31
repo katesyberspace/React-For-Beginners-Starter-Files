@@ -4,12 +4,36 @@ import Order from './Order'
 import Inventory from './Inventory'
 import fishes from '../sample-fishes'
 import Fish from './Fish'
+import base from '../base'
 
 class App extends React.Component {
+
+// STATE 
+
   state = {
     fishes: {},
     order: {}
   }
+
+// LIFECYCLE METHODS
+
+  componentDidMount(){
+    const { params } = this.props.match
+    
+    console.log(params.storeId)
+    this.ref = base.syncState(`${params.storeId}/fishes`, {
+      context: this,
+      state: 'fishes'
+    })
+  }
+
+  componentWillUnmount(){
+    console.log('unmounted')
+    base.removeBinding(this.ref)
+  }
+
+
+// CUSTOM METHODS   
 
   addFish = (fish)=>{
     // copy existing state -- immutability
@@ -35,6 +59,9 @@ class App extends React.Component {
   addSampleFishes = () => {
     this.setState({ fishes })
   }
+
+
+// RENDER METHOD
 
   render() {
     return (
